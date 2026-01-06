@@ -14,31 +14,28 @@
             --primary: #1e40af;        /* Deep Blue */
             --primary-light: #3b82f6;  /* Bright Blue */
             --primary-dark: #1e3a8a;   /* Navy Blue */
-            --secondary: #64748b;      /* Slate Gray */
-            --secondary-light: #94a3b8;
-            --bg-dark: #f8fafc;        /* Off-white Background */
-            --bg-card: #ffffff;        /* Pure White Cards */
+            --secondary: #f8fafc;      /* White/Off-white */
+            --bg-dark: #f1f5f9;        /* Light Gray background */
+            --bg-card: #ffffff;        /* Pure White cards */
             --bg-card-hover: #f1f5f9;
-            --text-primary: #0f172a;   /* Dark Navy Text */
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
-            --border: #e2e8f0;         /* Soft Gray Border */
+            --text-primary: #0f172a;   /* Near-black for readability */
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border: #cbd5e1;         /* Defined borders for visibility */
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --info: #0ea5e9;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
         }
 
         .header {
@@ -47,126 +44,103 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--primary-light);
+            border-bottom: 3px solid var(--primary-light);
             position: sticky;
             top: 0;
             z-index: 100;
-            flex-wrap: wrap;
-            gap: 1rem;
             color: white;
         }
 
         .logo-section { display: flex; align-items: center; gap: 1rem; }
-
         .logo {
-            width: 55px; height: 55px;
+            width: 50px; height: 50px;
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
             font-weight: 800; font-size: 1.25rem;
             color: var(--primary-dark);
-            box-shadow: var(--shadow);
         }
 
-        .header-title h1 { font-size: 1.5rem; font-weight: 700; color: white; }
-        .header-title span { font-size: 0.875rem; color: rgba(255,255,255,0.9); }
+        .header-title h1 { font-size: 1.4rem; font-weight: 700; }
+        .header-title span { font-size: 0.85rem; opacity: 0.9; }
 
         .btn {
             padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
             border: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            transition: 0.2s;
         }
 
-        .btn-primary { background: white; color: var(--primary); }
-        .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); opacity: 0.95; }
-        .btn-secondary { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
-        .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+        .btn-primary { background: white; color: var(--primary-dark); }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); }
         .btn-success { background: var(--success); color: white; }
         .btn-danger { background: var(--danger); color: white; }
 
-        .main-container { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 90px); }
+        .main-container { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 85px); }
 
-        .sidebar { background: var(--bg-card); border-right: 1px solid var(--border); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar { background: white; border-right: 1px solid var(--border); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-section { background: var(--bg-dark); border-radius: 8px; padding: 1rem; border: 1px solid var(--border); }
+        .sidebar-section h3 { font-size: 0.7rem; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 800; }
 
-        .sidebar-section { background: var(--bg-dark); border-radius: 12px; padding: 1rem; border: 1px solid var(--border); }
-        .sidebar-section h3 { font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+        .stat-item { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+        .stat-value { font-weight: 700; color: var(--primary-dark); }
 
-        .stat-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
-        .stat-label { font-size: 0.875rem; color: var(--text-secondary); }
-        .stat-value { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary); }
-
-        .total-amount { text-align: center; padding: 1rem; background: var(--primary); border-radius: 8px; margin-top: 0.5rem; }
-        .total-amount .label { font-size: 0.7rem; color: rgba(255,255,255,0.8); text-transform: uppercase; }
-        .total-amount .value { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: white; }
+        .total-amount { text-align: center; padding: 1rem; background: var(--primary-dark); border-radius: 6px; margin-top: 0.5rem; color: white; }
+        .total-amount .value { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: #60a5fa; }
 
         .filter-group { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.8rem; }
-        .filter-group label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
-        .filter-group select, .filter-group input { padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; width: 100%; }
+        .filter-group label { font-size: 0.7rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; }
+        .filter-group select, .filter-group input { padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 0.85rem; }
 
         .content { padding: 1.5rem; }
-
         .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .tab { padding: 0.6rem 1.2rem; border: 1px solid var(--border); background: white; color: var(--text-secondary); border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .tab { padding: 0.6rem 1.2rem; border: 1px solid var(--border); background: white; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); }
         .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .table-container { background: white; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
-        .table-toolbar { padding: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); align-items: center; }
-
-        .search-box { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-dark); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border); width: 300px; }
-        .search-box input { background: transparent; border: none; outline: none; width: 100%; color: var(--text-primary); }
+        .table-container { background: white; border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+        .table-toolbar { padding: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); background: #f8fafc; }
 
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
         th { 
-            background: #f8fafc; 
+            background: #f1f5f9; 
             padding: 1rem; 
             text-align: left; 
-            color: var(--text-secondary); 
-            font-weight: 700; 
+            font-weight: 800; 
+            font-size: 0.75rem; 
             text-transform: uppercase; 
-            font-size: 0.7rem; 
+            color: var(--text-primary); 
             border-bottom: 2px solid var(--border);
             cursor: pointer;
-            transition: background 0.2s;
         }
-        th:hover { background: #f1f5f9; }
-        td { padding: 1rem; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+        th:hover { background: #e2e8f0; }
+        td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-primary); }
         tr:hover td { background: var(--bg-card-hover); }
 
-        .sort-icon { font-size: 0.8rem; margin-left: 4px; color: var(--text-muted); }
-
-        .status-badge { padding: 0.25rem 0.6rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .status-badge { padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
         .status-completed { background: #dcfce7; color: #166534; }
         .status-pending { background: #fef3c7; color: #92400e; }
-        .status-in-progress { background: #dbeafe; color: #1e40af; }
 
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(2px); }
         .modal-overlay.active { display: flex; }
-        .modal { background: white; width: 90%; max-width: 800px; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-        .modal-header { padding: 1.5rem; background: var(--bg-dark); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+        .modal { background: white; width: 90%; max-width: 800px; border-radius: 12px; overflow: hidden; }
+        .modal-header { padding: 1.5rem; background: var(--bg-dark); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
         .modal-body { padding: 1.5rem; max-height: 70vh; overflow-y: auto; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .full-width { grid-column: span 2; }
-        .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.3rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.7rem; border: 1px solid var(--border); border-radius: 8px; }
-
+        .form-group label { display: block; font-size: 0.75rem; font-weight: 800; margin-bottom: 0.3rem; color: var(--text-secondary); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 4px; }
         .modal-footer { padding: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 0.5rem; }
 
-        .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 2000; display: flex; flex-direction: column; gap: 0.5rem; }
-        .toast { background: var(--text-primary); color: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: var(--shadow-lg); font-size: 0.875rem; animation: slideIn 0.3s; }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
-
-        /* KPI visibility improvements */
-        .kpi-card { background: white; padding: 1rem; border-radius: 10px; border: 1px solid var(--border); text-align: center; }
-        .kpi-value { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
-        .kpi-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
-
+        .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 2000; }
+        .toast { background: var(--text-primary); color: white; padding: 0.8rem 1.5rem; border-radius: 6px; box-shadow: var(--shadow); margin-top: 0.5rem; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -174,93 +148,76 @@
         <div class="logo-section">
             <div class="logo">BOS</div>
             <div class="header-title">
-                <h1>Procurement Tracker</h1>
-                <span>Departmental Dashboard & Analytics</span>
+                <h1>Procurement Tracking System</h1>
+                <span>Bureau of Statistics - Procurement Unit</span>
             </div>
         </div>
         <div class="header-actions">
-            <button class="btn btn-secondary" onclick="showImportModal()">📥 Import</button>
-            <button class="btn btn-secondary" onclick="exportToExcel()">📊 Excel</button>
-            <button class="btn btn-primary" onclick="showAddModal()">➕ New Entry</button>
+            <button class="btn btn-secondary" onclick="showImportModal()">📥 Import Excel</button>
+            <button class="btn btn-primary" onclick="showAddModal()">➕ New Transaction</button>
         </div>
     </header>
 
     <div class="main-container">
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3>📊 Metrics</h3>
+                <h3>📊 Overview</h3>
                 <div class="stat-grid">
-                    <div class="stat-item">
-                        <span class="stat-label">Total Volume</span>
-                        <span class="stat-value" id="stat-total">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Pending Approval</span>
-                        <span class="stat-value" id="stat-pending" style="color:var(--warning)">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Paid Orders</span>
-                        <span class="stat-value" id="stat-paid" style="color:var(--success)">0</span>
-                    </div>
+                    <div class="stat-item"><span class="stat-label">Total</span><span class="stat-value" id="stat-total">0</span></div>
+                    <div class="stat-item"><span class="stat-label">Pending</span><span class="stat-value" id="stat-pending">0</span></div>
+                    <div class="stat-item"><span class="stat-label">Paid</span><span class="stat-value" id="stat-paid">0</span></div>
                 </div>
                 <div class="total-amount">
-                    <div class="label">Total Spend (GYD)</div>
+                    <div style="font-size: 0.65rem; text-transform: uppercase; font-weight: 800;">Total Spend</div>
                     <div class="value" id="stat-amount">$0</div>
                 </div>
             </div>
 
             <div class="sidebar-section">
-                <h3>🔍 Filter Controls</h3>
-                <div class="filter-group">
-                    <label>Date Range (From)</label>
-                    <input type="date" id="filter-date-from" onchange="updateTable()">
-                </div>
-                <div class="filter-group">
-                    <label>Date Range (To)</label>
-                    <input type="date" id="filter-date-to" onchange="updateTable()">
-                </div>
+                <h3>🔍 Filters</h3>
                 <div class="filter-group">
                     <label>Status</label>
                     <select id="filter-status" onchange="updateTable()">
-                        <option value="">All Statuses</option>
-                        <option value="Approved by CS">Approved by CS</option>
-                        <option value="Approved by Tender Board">Approved by Tender Board</option>
-                        <option value="Pending">Pending</option>
+                        <option value="">All Status</option>
+                        <option value="Pending Approval">Pending Approval</option>
+                        <option value="Approved">Approved</option>
                     </select>
                 </div>
-                <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem; color: var(--text-primary); border-color: var(--border);" onclick="clearFilters()">Reset Filters</button>
+                <div class="filter-group">
+                    <label>Payment</label>
+                    <select id="filter-payment" onchange="updateTable()">
+                        <option value="">All</option>
+                        <option value="paid">Paid</option>
+                        <option value="unpaid">Unpaid</option>
+                    </select>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 1rem; background: #e2e8f0;" onclick="clearFilters()">Reset Filters</button>
             </div>
         </aside>
 
         <main class="content">
             <div class="tabs">
-                <button class="tab active" onclick="switchTab('all', this)">All</button>
-                <button class="tab" onclick="switchTab('pending', this)">Pending</button>
-                <button class="tab" onclick="switchTab('completed', this)">Completed</button>
+                <button class="tab active" onclick="switchTab('all', this)">All Transactions</button>
+                <button class="tab" onclick="switchTab('pending', this)">Pending (Unpaid)</button>
+                <button class="tab" onclick="switchTab('completed', this)">Completed (Paid)</button>
             </div>
 
             <div class="table-container">
                 <div class="table-toolbar">
-                    <div class="search-box">
-                        🔍 <input type="text" id="search-input" placeholder="Search suppliers or details..." onkeyup="updateTable()">
-                    </div>
-                    <div style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">
-                        Showing <span id="record-count">0</span> records
-                    </div>
+                    <input type="text" id="search-input" placeholder="Search..." onkeyup="updateTable()" style="padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; width: 250px;">
                 </div>
-
                 <div style="overflow-x: auto;">
-                    <table id="procurement-table">
+                    <table>
                         <thead>
                             <tr>
-                                <th onclick="handleSort('details')">Details <span class="sort-icon">↕</span></th>
-                                <th onclick="handleSort('supplier')">Supplier <span class="sort-icon">↕</span></th>
-                                <th onclick="handleSort('amount')">Amount <span class="sort-icon">↕</span></th>
-                                <th onclick="handleSort('rfqDate')">RFQ Date <span class="sort-icon">↕</span></th>
-                                <th onclick="handleSort('closeDate')">Close Date <span class="sort-icon">↕</span></th>
+                                <th>Details</th>
+                                <th>Supplier</th>
+                                <th>Amount (GYD)</th>
+                                <th onclick="sortTransactions('rfqDate')" style="cursor: pointer;">RFQ Date ↕</th>
+                                <th onclick="sortTransactions('closeDate')" style="cursor: pointer;">Close Date ↕</th>
                                 <th>Approval</th>
                                 <th>Paid</th>
-                                <th style="cursor: default">Actions</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="table-body"></tbody>
@@ -273,43 +230,25 @@
     <div class="modal-overlay" id="transaction-modal">
         <div class="modal">
             <div class="modal-header">
-                <h2 id="modal-title" style="font-size: 1.1rem;">Add Transaction</h2>
-                <button onclick="closeModal('transaction-modal')" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">&times;</button>
+                <h2 id="modal-title">New Transaction</h2>
+                <button onclick="closeModal('transaction-modal')" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="transaction-form" class="form-grid">
                     <input type="hidden" id="edit-id">
-                    <div class="form-group full-width">
-                        <label>Details</label>
-                        <input type="text" id="details" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Supplier</label>
-                        <input type="text" id="supplier" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Amount (GYD)</label>
-                        <input type="number" id="amount" required>
-                    </div>
-                    <div class="form-group">
-                        <label>RFQ Date</label>
-                        <input type="date" id="rfq-date">
-                    </div>
-                    <div class="form-group">
-                        <label>Close Date</label>
-                        <input type="date" id="close-date">
-                    </div>
+                    <div class="form-group full-width"><label>Details</label><input type="text" id="details" required></div>
+                    <div class="form-group"><label>Supplier</label><input type="text" id="supplier" required></div>
+                    <div class="form-group"><label>Amount (GYD)</label><input type="number" id="amount" required></div>
+                    <div class="form-group"><label>RFQ Date</label><input type="date" id="rfq-date"></div>
+                    <div class="form-group"><label>Close Date</label><input type="date" id="close-date"></div>
                     <div class="form-group">
                         <label>Approval Status</label>
                         <select id="approval-status">
-                            <option value="Pending">Pending</option>
-                            <option value="Approved by CS">Approved by CS</option>
-                            <option value="Approved by Tender Board">Approved by Tender Board</option>
+                            <option value="Pending Approval">Pending Approval</option>
+                            <option value="Approved">Approved</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Approval #</label> <input type="text" id="mtb-number">
-                    </div>
+                    <div class="form-group"><label>Approval #</label><input type="text" id="mtb-number"></div>
                     <div class="form-group">
                         <label>Payment Made</label>
                         <select id="payment-made">
@@ -317,25 +256,20 @@
                             <option value="true">Yes</option>
                         </select>
                     </div>
-                    <div class="form-group full-width">
-                        <label>Remarks</label>
-                        <textarea id="remarks"></textarea>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" style="background:#e2e8f0; color:#475569" onclick="closeModal('transaction-modal')">Cancel</button>
-                <button class="btn btn-primary" style="background:var(--primary); color:white" onclick="saveTransaction()">Save Record</button>
+                <button class="btn" style="background: #e2e8f0;" onclick="closeModal('transaction-modal')">Cancel</button>
+                <button class="btn btn-primary" style="background: var(--primary); color: white;" onclick="saveTransaction()">Save</button>
             </div>
         </div>
     </div>
 
     <div class="modal-overlay" id="import-modal">
-        <div class="modal" style="max-width: 450px;">
+        <div class="modal" style="max-width: 400px;">
             <div class="modal-header"><h2>Import Excel</h2></div>
             <div class="modal-body">
                 <input type="file" id="excel-input" accept=".xlsx,.xls" onchange="handleFileSelect(event)">
-                <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 1rem;">Maps columns from 2023/2025 Spreadsheet Templates.</p>
             </div>
         </div>
     </div>
@@ -345,113 +279,95 @@
     <script>
         let transactions = [];
         let currentTab = 'all';
-        let sortColumn = 'rfqDate';
-        let sortDirection = -1; // Default descending (newest first)
+        let sortDir = 1;
 
-        // Initial Load
         loadFromLocalStorage();
 
         function saveToLocalStorage() { localStorage.setItem('bos_procurement_data', JSON.stringify(transactions)); }
         function loadFromLocalStorage() {
             const saved = localStorage.getItem('bos_procurement_data');
-            if (saved) { transactions = JSON.parse(saved); }
+            if (saved) transactions = JSON.parse(saved);
             updateTable();
-            updateStats();
         }
 
-        function handleSort(column) {
-            if (sortColumn === column) {
-                sortDirection *= -1;
-            } else {
-                sortColumn = column;
-                sortDirection = 1;
-            }
+        function sortTransactions(col) {
+            sortDir *= -1;
+            transactions.sort((a, b) => {
+                const valA = a[col] || '';
+                const valB = b[col] || '';
+                return valA < valB ? -sortDir : (valA > valB ? sortDir : 0);
+            });
             updateTable();
         }
 
         function updateTable() {
             const tbody = document.getElementById('table-body');
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const search = document.getElementById('search-input').value.toLowerCase();
             const statusFilter = document.getElementById('filter-status').value;
-            const dateFrom = document.getElementById('filter-date-from').value;
-            const dateTo = document.getElementById('filter-date-to').value;
+            const paymentFilter = document.getElementById('filter-payment').value;
 
-            // Filter
-            let displayData = transactions.filter(txn => {
-                const matchesSearch = (txn.details + txn.supplier).toLowerCase().includes(searchTerm);
+            const filtered = transactions.filter(txn => {
+                const matchesSearch = (txn.details + txn.supplier).toLowerCase().includes(search);
                 const matchesStatus = !statusFilter || txn.approvalStatus === statusFilter;
+                const matchesPayment = !paymentFilter || (paymentFilter === 'paid' ? txn.paymentMade : !txn.paymentMade);
+                
+                // USER LOGIC: Remain in "Pending" tab if not paid
                 const matchesTab = currentTab === 'all' || 
-                                  (currentTab === 'pending' && !txn.approvalStatus.includes('Approved')) ||
-                                  (currentTab === 'completed' && txn.approvalStatus.includes('Approved'));
-                
-                const matchesDate = (!dateFrom || txn.rfqDate >= dateFrom) && 
-                                   (!dateTo || txn.rfqDate <= dateTo);
+                    (currentTab === 'pending' && !txn.paymentMade) || 
+                    (currentTab === 'completed' && txn.paymentMade);
 
-                return matchesSearch && matchesStatus && matchesTab && matchesDate;
+                return matchesSearch && matchesStatus && matchesPayment && matchesTab;
             });
 
-            // Sort
-            displayData.sort((a, b) => {
-                let valA = a[sortColumn] || '';
-                let valB = b[sortColumn] || '';
-                
-                if (sortColumn === 'amount') {
-                    valA = parseFloat(valA);
-                    valB = parseFloat(valB);
-                }
-
-                if (valA < valB) return -1 * sortDirection;
-                if (valA > valB) return 1 * sortDirection;
-                return 0;
-            });
-
-            document.getElementById('record-count').textContent = displayData.length;
-
-            tbody.innerHTML = displayData.map(txn => `
+            tbody.innerHTML = filtered.map(txn => `
                 <tr>
-                    <td><div style="font-weight:600">${txn.details || '-'}</div><div style="font-size:0.65rem; color:var(--text-muted)">${txn.id}</div></td>
-                    <td><span style="color:var(--primary); font-weight:500">${txn.supplier || '-'}</span></td>
-                    <td style="font-family: 'JetBrains Mono'; font-weight:700">$${(txn.amount || 0).toLocaleString()}</td>
+                    <td><div style="font-weight:700">${txn.details || '-'}</div></td>
+                    <td><span style="color:var(--primary); font-weight:600">${txn.supplier || '-'}</span></td>
+                    <td style="font-family:monospace; font-weight:700">$${(Number(txn.amount)||0).toLocaleString()}</td>
                     <td>${txn.rfqDate || '-'}</td>
                     <td>${txn.closeDate || '-'}</td>
-                    <td><span class="status-badge ${txn.approvalStatus.includes('Approved') ? 'status-completed' : 'status-pending'}">${txn.approvalStatus}</span></td>
-                    <td>${txn.paymentMade ? '✅' : '❌'}</td>
+                    <td><span class="status-badge ${txn.approvalStatus === 'Approved' ? 'status-completed' : 'status-pending'}">${txn.approvalStatus || 'Pending Approval'}</span></td>
+                    <td>${txn.paymentMade ? '✅ Paid' : '❌ Unpaid'}</td>
                     <td>
                         <button onclick="editTransaction('${txn.id}')" style="background:none; border:none; cursor:pointer;">✏️</button>
                         <button onclick="deleteTransaction('${txn.id}')" style="background:none; border:none; cursor:pointer;">🗑️</button>
                     </td>
                 </tr>
             `).join('');
+
             updateStats();
         }
 
         function updateStats() {
             const total = transactions.length;
-            const pending = transactions.filter(t => t.approvalStatus === 'Pending').length;
-            const paid = transactions.filter(t => t.paymentMade).length;
+            const pendingCount = transactions.filter(t => !t.paymentMade).length;
+            const paidCount = transactions.filter(t => t.paymentMade).length;
             const totalSpend = transactions.reduce((sum, t) => sum + (parseFloat(t.amount) || 0), 0);
 
             document.getElementById('stat-total').textContent = total;
-            document.getElementById('stat-pending').textContent = pending;
-            document.getElementById('stat-paid').textContent = paid;
+            document.getElementById('stat-pending').textContent = pendingCount;
+            document.getElementById('stat-paid').textContent = paidCount;
             document.getElementById('stat-amount').textContent = '$' + totalSpend.toLocaleString();
         }
 
-        // Modal Logic
-        function showModal(id) { document.getElementById(id).classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function switchTab(tab, el) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            updateTable();
+        }
 
         function showAddModal() {
             document.getElementById('transaction-form').reset();
             document.getElementById('edit-id').value = '';
-            document.getElementById('modal-title').textContent = 'Add New Transaction';
+            document.getElementById('modal-title').textContent = 'New Transaction';
             showModal('transaction-modal');
         }
 
         function saveTransaction() {
             const id = document.getElementById('edit-id').value || 'TXN-' + Date.now();
             const data = {
-                id: id,
+                id,
                 details: document.getElementById('details').value,
                 supplier: document.getElementById('supplier').value,
                 amount: document.getElementById('amount').value,
@@ -459,27 +375,16 @@
                 closeDate: document.getElementById('close-date').value,
                 approvalStatus: document.getElementById('approval-status').value,
                 mtbNumber: document.getElementById('mtb-number').value,
-                paymentMade: document.getElementById('payment-made').value === 'true',
-                remarks: document.getElementById('remarks').value
+                paymentMade: document.getElementById('payment-made').value === 'true'
             };
 
             const idx = transactions.findIndex(t => t.id === id);
-            if (idx > -1) transactions[idx] = data;
-            else transactions.unshift(data);
+            if (idx > -1) transactions[idx] = data; else transactions.unshift(data);
 
             saveToLocalStorage();
             updateTable();
             closeModal('transaction-modal');
-            showToast('Record Saved Successfully');
-        }
-
-        function deleteTransaction(id) {
-            if (confirm('Delete this record?')) {
-                transactions = transactions.filter(t => t.id !== id);
-                saveToLocalStorage();
-                updateTable();
-                showToast('Record Deleted', 'danger');
-            }
+            showToast('Saved Successfully');
         }
 
         function editTransaction(id) {
@@ -490,75 +395,39 @@
             document.getElementById('amount').value = txn.amount;
             document.getElementById('rfq-date').value = txn.rfqDate;
             document.getElementById('close-date').value = txn.closeDate;
-            document.getElementById('approval-status').value = txn.approvalStatus;
+            document.getElementById('approval-status').value = txn.approvalStatus || 'Pending Approval';
             document.getElementById('mtb-number').value = txn.mtbNumber;
             document.getElementById('payment-made').value = txn.paymentMade.toString();
-            document.getElementById('remarks').value = txn.remarks;
             document.getElementById('modal-title').textContent = 'Edit Transaction';
             showModal('transaction-modal');
         }
 
+        function deleteTransaction(id) { if (confirm('Delete?')) { transactions = transactions.filter(t => t.id !== id); saveToLocalStorage(); updateTable(); } }
+        function showModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
         function showImportModal() { showModal('import-modal'); }
-
+        function clearFilters() { document.getElementById('filter-status').value = ''; document.getElementById('filter-payment').value = ''; updateTable(); }
+        function showToast(m) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = m; document.getElementById('toast-container').appendChild(t); setTimeout(() => t.remove(), 3000); }
+        
         function handleFileSelect(e) {
             const reader = new FileReader();
-            reader.onload = function(event) {
-                const data = new Uint8Array(event.target.result);
-                const wb = XLSX.read(data, {type: 'array'});
-                const sheet = wb.Sheets[wb.SheetNames[0]];
-                const json = XLSX.utils.sheet_to_json(sheet);
-                
-                // Simple mapping for demonstration
-                const imported = json.map(row => ({
-                    id: 'TXN-' + Math.random().toString(36).substr(2, 5).toUpperCase(),
-                    details: row['Details'] || row['details'] || '',
-                    supplier: row['Supplier'] || row['supplier'] || '',
-                    amount: row['Amount'] || 0,
-                    rfqDate: row['Date of RFQ'] || '',
-                    closeDate: row['Close of RFQ'] || '',
-                    approvalStatus: row['Approved'] || 'Pending',
-                    paymentMade: row['Paid'] === 'True' || row['Paid'] === 'paid' || false,
-                    remarks: row['Remarks'] || ''
+            reader.onload = (event) => {
+                const wb = XLSX.read(new Uint8Array(event.target.result), {type: 'array'});
+                const json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+                const mapped = json.map(r => ({
+                    id: 'TXN-' + Math.random().toString(36).substr(2, 5),
+                    details: r['Details'] || '',
+                    supplier: r['Supplier'] || '',
+                    amount: r['Amount'] || 0,
+                    rfqDate: r['Date of RFQ'] || '',
+                    closeDate: r['Close of RFQ'] || '',
+                    approvalStatus: r['Approved'] ? 'Approved' : 'Pending Approval',
+                    paymentMade: r['Payment Made'] === 'True' || r['Paid'] === 'paid'
                 }));
-
-                transactions = [...imported, ...transactions];
-                saveToLocalStorage();
-                updateTable();
-                closeModal('import-modal');
-                showToast(`Imported ${imported.length} rows`);
+                transactions = [...mapped, ...transactions];
+                saveToLocalStorage(); updateTable(); closeModal('import-modal');
             };
             reader.readAsArrayBuffer(e.target.files[0]);
-        }
-
-        function switchTab(tab, el) {
-            currentTab = tab;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            updateTable();
-        }
-
-        function clearFilters() {
-            document.getElementById('filter-date-from').value = '';
-            document.getElementById('filter-date-to').value = '';
-            document.getElementById('filter-status').value = '';
-            document.getElementById('search-input').value = '';
-            updateTable();
-        }
-
-        function showToast(msg) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = msg;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        function exportToExcel() {
-            const ws = XLSX.utils.json_to_sheet(transactions);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Procurement");
-            XLSX.writeFile(wb, "BOS_Procurement_Export.xlsx");
         }
     </script>
 </body>

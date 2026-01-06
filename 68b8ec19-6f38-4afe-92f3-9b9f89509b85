@@ -1,0 +1,30 @@
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // SAVE data
+    if (url.pathname === "/save" && request.method === "POST") {
+      const data = await request.json();
+
+      await env.DB.prepare(`
+        INSERT INTO procurement (supplier, item, amount)
+        VALUES (?, ?, ?)
+      `)
+      .bind(data.supplier, data.item, data.amount)
+      .run();
+
+      return new Response("Saved");
+    }
+
+    // LOAD data
+    if (url.pathname === "/records" && request.method === "GET") {
+      const { results } = await env.DB
+        .prepare("SELECT * FROM procurement")
+        .all();
+
+      return Response.json(results);
+    }
+
+    return new Response("Not found", { status: 404 });
+  }
+};

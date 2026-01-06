@@ -9,28 +9,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Update these in index.html */
-:root {
-            --primary: #1a5f4a;
-            --primary-light: #2a8f6a;
-            --primary-dark: #0d3f2f;
-            --secondary: #d4af37;
-            --secondary-light: #f4cf57;
-            --bg-dark: #0f1419;
-            --bg-card: #1a2027;
-            --bg-card-hover: #242d36;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --border: #2d3a47;
-            --success: #22c55e;
+        :root {
+            /* Blue & White Professional Theme */
+            --primary: #1e40af;        /* Deep Blue */
+            --primary-light: #3b82f6;  /* Bright Blue */
+            --primary-dark: #1e3a8a;   /* Navy Blue */
+            --secondary: #64748b;      /* Slate Gray */
+            --secondary-light: #94a3b8;
+            --bg-dark: #f8fafc;        /* Off-white Background */
+            --bg-card: #ffffff;        /* Pure White Cards */
+            --bg-card-hover: #f1f5f9;
+            --text-primary: #0f172a;   /* Dark Navy Text */
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;         /* Soft Gray Border */
+            --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --info: #3b82f6;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+            --info: #0ea5e9;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
         }
-
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -43,403 +42,131 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
-            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 1.25rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--secondary);
+            border-bottom: 4px solid var(--primary-light);
             position: sticky;
             top: 0;
             z-index: 100;
             flex-wrap: wrap;
             gap: 1rem;
+            color: white;
         }
 
         .logo-section { display: flex; align-items: center; gap: 1rem; }
 
         .logo {
-            width: 60px; height: 60px;
-            background: var(--secondary);
-            border-radius: 12px;
+            width: 55px; height: 55px;
+            background: white;
+            border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 1.5rem;
+            font-weight: 800; font-size: 1.25rem;
             color: var(--primary-dark);
             box-shadow: var(--shadow);
         }
 
-        .header-title { display: flex; flex-direction: column; }
-        .header-title h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
-        .header-title span { font-size: 0.875rem; color: rgba(255,255,255,0.8); }
-
-        .header-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .header-title h1 { font-size: 1.5rem; font-weight: 700; color: white; }
+        .header-title span { font-size: 0.875rem; color: rgba(255,255,255,0.9); }
 
         .btn {
-            padding: 0.625rem 1.25rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 8px;
-            font-family: inherit;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             border: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .btn-primary { background: var(--secondary); color: var(--primary-dark); }
-        .btn-primary:hover { background: var(--secondary-light); transform: translateY(-1px); box-shadow: var(--shadow); }
-        .btn-secondary { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); }
+        .btn-primary { background: white; color: var(--primary); }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); opacity: 0.95; }
+        .btn-secondary { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
         .btn-secondary:hover { background: rgba(255,255,255,0.25); }
         .btn-success { background: var(--success); color: white; }
         .btn-danger { background: var(--danger); color: white; }
-        .btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .main-container { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 90px); }
 
-        .sidebar {
-            background: var(--bg-card);
-            border-right: 1px solid var(--border);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+        .sidebar { background: var(--bg-card); border-right: 1px solid var(--border); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
 
-        .sidebar-section {
-            background: var(--bg-dark);
-            border-radius: 12px;
-            padding: 1rem;
-            border: 1px solid var(--border);
-        }
+        .sidebar-section { background: var(--bg-dark); border-radius: 12px; padding: 1rem; border: 1px solid var(--border); }
+        .sidebar-section h3 { font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
 
-        .sidebar-section h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-
-        .stat-grid { display: grid; gap: 0.75rem; }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .stat-item:last-child { border-bottom: none; }
+        .stat-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
         .stat-label { font-size: 0.875rem; color: var(--text-secondary); }
-        .stat-value { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.875rem; }
-        .stat-value.success { color: var(--success); }
-        .stat-value.warning { color: var(--warning); }
-        .stat-value.info { color: var(--info); }
+        .stat-value { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary); }
 
-        .total-amount {
-            text-align: center;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            border-radius: 8px;
-            margin-top: 0.5rem;
-        }
-        .total-amount .label { font-size: 0.75rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.05em; }
-        .total-amount .value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--secondary); }
+        .total-amount { text-align: center; padding: 1rem; background: var(--primary); border-radius: 8px; margin-top: 0.5rem; }
+        .total-amount .label { font-size: 0.7rem; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+        .total-amount .value { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: white; }
 
-        .filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .filter-group label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-        .filter-group select, .filter-group input {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.875rem;
-        }
-        .filter-group select:focus, .filter-group input:focus { outline: none; border-color: var(--primary-light); }
+        .filter-group { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.8rem; }
+        .filter-group label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
+        .filter-group select, .filter-group input { padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; width: 100%; }
 
-        .content { padding: 1.5rem; overflow-x: auto; }
+        .content { padding: 1.5rem; }
 
-        .tabs {
-            display: flex;
-            gap: 0.25rem;
-            background: var(--bg-card);
-            padding: 0.25rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            width: fit-content;
-        }
+        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tab { padding: 0.6rem 1.2rem; border: 1px solid var(--border); background: white; color: var(--text-secondary); border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .tab {
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 0.875rem;
+        .table-container { background: white; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+        .table-toolbar { padding: 1rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); align-items: center; }
+
+        .search-box { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-dark); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border); width: 300px; }
+        .search-box input { background: transparent; border: none; outline: none; width: 100%; color: var(--text-primary); }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { 
+            background: #f8fafc; 
+            padding: 1rem; 
+            text-align: left; 
+            color: var(--text-secondary); 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 0.7rem; 
+            border-bottom: 2px solid var(--border);
             cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+            transition: background 0.2s;
         }
-        .tab:hover { color: var(--text-primary); background: var(--bg-card-hover); }
-        .tab.active { background: var(--primary); color: white; }
-
-        .table-container {
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .table-toolbar {
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-dark);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            min-width: 300px;
-        }
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-family: inherit;
-            width: 100%;
-        }
-        .search-box input:focus { outline: none; }
-        .search-box input::placeholder { color: var(--text-muted); }
-
-        table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-
-        th {
-            background: var(--bg-dark);
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            white-space: nowrap;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            padding: 0.875rem 1rem;
-            border-bottom: 1px solid var(--border);
-            vertical-align: middle;
-        }
-
+        th:hover { background: #f1f5f9; }
+        td { padding: 1rem; border-bottom: 1px solid var(--border); color: var(--text-primary); }
         tr:hover td { background: var(--bg-card-hover); }
 
-        .procurement-id { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); }
-        .amount-cell { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--secondary); }
+        .sort-icon { font-size: 0.8rem; margin-left: 4px; color: var(--text-muted); }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
+        .status-badge { padding: 0.25rem 0.6rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .status-completed { background: #dcfce7; color: #166534; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-in-progress { background: #dbeafe; color: #1e40af; }
 
-        .status-completed { background: rgba(34, 197, 94, 0.15); color: var(--success); }
-        .status-pending { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-        .status-in-progress { background: rgba(59, 130, 246, 0.15); color: var(--info); }
-        .status-not-started { background: rgba(100, 116, 139, 0.15); color: var(--text-muted); }
-        .status-approved-cs { background: rgba(34, 197, 94, 0.15); color: var(--success); }
-        .status-approved-tb { background: rgba(212, 175, 55, 0.15); color: var(--secondary); }
-        .status-for-approval { background: rgba(59, 130, 246, 0.15); color: var(--info); }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; width: 90%; max-width: 800px; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .modal-header { padding: 1.5rem; background: var(--bg-dark); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+        .modal-body { padding: 1.5rem; max-height: 70vh; overflow-y: auto; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .full-width { grid-column: span 2; }
+        .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.3rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.7rem; border: 1px solid var(--border); border-radius: 8px; }
 
-        .checkbox-cell { text-align: center; }
-        .checkbox-cell input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--success); cursor: pointer; }
+        .modal-footer { padding: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 0.5rem; }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            backdrop-filter: blur(4px);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 2000; display: flex; flex-direction: column; gap: 0.5rem; }
+        .toast { background: var(--text-primary); color: white; padding: 1rem 1.5rem; border-radius: 10px; box-shadow: var(--shadow-lg); font-size: 0.875rem; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
-        .modal {
-            background: var(--bg-card);
-            border-radius: 16px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .modal { transform: translateY(0); }
+        /* KPI visibility improvements */
+        .kpi-card { background: white; padding: 1rem; border-radius: 10px; border: 1px solid var(--border); text-align: center; }
+        .kpi-value { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .kpi-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
 
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .modal-header h2 { font-size: 1.25rem; font-weight: 700; }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            line-height: 1;
-        }
-        .modal-close:hover { color: var(--text-primary); }
-
-        .modal-body { padding: 1.5rem; }
-
-        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-
-        .form-group { display: flex; flex-direction: column; gap: 0.375rem; }
-        .form-group.full-width { grid-column: 1 / -1; }
-        .form-group label { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); }
-        .form-group input, .form-group select, .form-group textarea {
-            padding: 0.75rem 1rem;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.875rem;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-light); }
-        .form-group textarea { resize: vertical; min-height: 80px; }
-
-        .modal-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.75rem;
-        }
-
-        .action-btns { display: flex; gap: 0.5rem; }
-
-        .action-btn {
-            padding: 0.375rem 0.625rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.75rem;
-            transition: all 0.2s ease;
-        }
-        .action-btn:hover { background: var(--bg-dark); color: var(--text-primary); }
-        .action-btn.delete:hover { border-color: var(--danger); color: var(--danger); }
-
-        .import-zone {
-            border: 2px dashed var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.2s ease;
-            margin-bottom: 1rem;
-        }
-        .import-zone:hover { border-color: var(--primary); background: rgba(26, 95, 74, 0.1); }
-        .import-zone.dragover { border-color: var(--secondary); background: rgba(212, 175, 55, 0.1); }
-        .import-zone input[type="file"] { display: none; }
-        .import-zone label { cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-        .import-icon { font-size: 2.5rem; color: var(--primary-light); }
-
-        .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
-        .empty-state-icon { font-size: 4rem; margin-bottom: 1rem; }
-
-        .toast-container {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .toast {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: var(--shadow-lg);
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .toast.success { border-left: 4px solid var(--success); }
-        .toast.error { border-left: 4px solid var(--danger); }
-        .toast.warning { border-left: 4px solid var(--warning); }
-
-        .supplier-name {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.625rem;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 6px;
-            font-size: 0.8125rem;
-            color: var(--info);
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        @media (max-width: 1024px) {
-            .main-container { grid-template-columns: 1fr; }
-            .sidebar { display: none; }
-            .form-grid { grid-template-columns: 1fr; }
-            .search-box { min-width: 200px; }
-        }
-
-        @media print {
-            .header, .sidebar, .tabs, .table-toolbar, .action-btns { display: none !important; }
-            .main-container { display: block; }
-            .content { padding: 0; }
-            .table-container { border: none; }
-        }
     </style>
 </head>
 <body>
@@ -447,102 +174,78 @@
         <div class="logo-section">
             <div class="logo">BOS</div>
             <div class="header-title">
-                <h1>Procurement Tracking System</h1>
-                <span>Bureau of Statistics - Procurement Unit</span>
+                <h1>Procurement Tracker</h1>
+                <span>Departmental Dashboard & Analytics</span>
             </div>
         </div>
         <div class="header-actions">
-            <button class="btn btn-secondary" onclick="showImportModal()">📥 Import Excel</button>
-            <button class="btn btn-secondary" onclick="exportToExcel()">📊 Export Excel</button>
-            <button class="btn btn-secondary" onclick="exportToPDF()">📄 Export PDF</button>
-            <button class="btn btn-primary" onclick="showAddModal()">➕ New Transaction</button>
+            <button class="btn btn-secondary" onclick="showImportModal()">📥 Import</button>
+            <button class="btn btn-secondary" onclick="exportToExcel()">📊 Excel</button>
+            <button class="btn btn-primary" onclick="showAddModal()">➕ New Entry</button>
         </div>
     </header>
 
     <div class="main-container">
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3>📊 Overview</h3>
+                <h3>📊 Metrics</h3>
                 <div class="stat-grid">
                     <div class="stat-item">
-                        <span class="stat-label">Total Transactions</span>
-                        <span class="stat-value info" id="stat-total">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Completed</span>
-                        <span class="stat-value success" id="stat-completed">0</span>
+                        <span class="stat-label">Total Volume</span>
+                        <span class="stat-value" id="stat-total">0</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Pending Approval</span>
-                        <span class="stat-value warning" id="stat-pending">0</span>
+                        <span class="stat-value" id="stat-pending" style="color:var(--warning)">0</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">Payment Made</span>
-                        <span class="stat-value success" id="stat-paid">0</span>
+                        <span class="stat-label">Paid Orders</span>
+                        <span class="stat-value" id="stat-paid" style="color:var(--success)">0</span>
                     </div>
                 </div>
                 <div class="total-amount">
-                    <div class="label">Total Value</div>
-                    <div class="value" id="stat-amount">$0.00</div>
+                    <div class="label">Total Spend (GYD)</div>
+                    <div class="value" id="stat-amount">$0</div>
                 </div>
             </div>
 
             <div class="sidebar-section">
-                <h3>🔍 Filters</h3>
+                <h3>🔍 Filter Controls</h3>
                 <div class="filter-group">
-                    <label>Year</label>
-                    <select id="filter-year" onchange="applyFilters()">
-                        <option value="">All Years</option>
-                        <option value="2025">2025</option>
-                        <option value="2024">2024</option>
-                        <option value="2023">2023</option>
-                    </select>
+                    <label>Date Range (From)</label>
+                    <input type="date" id="filter-date-from" onchange="updateTable()">
                 </div>
-                <div class="filter-group" style="margin-top: 0.75rem;">
+                <div class="filter-group">
+                    <label>Date Range (To)</label>
+                    <input type="date" id="filter-date-to" onchange="updateTable()">
+                </div>
+                <div class="filter-group">
                     <label>Status</label>
-                    <select id="filter-status" onchange="applyFilters()">
-                        <option value="">All Status</option>
+                    <select id="filter-status" onchange="updateTable()">
+                        <option value="">All Statuses</option>
                         <option value="Approved by CS">Approved by CS</option>
                         <option value="Approved by Tender Board">Approved by Tender Board</option>
-                        <option value="For Tender Board Approval">For Tender Board Approval</option>
                         <option value="Pending">Pending</option>
                     </select>
                 </div>
-                <div class="filter-group" style="margin-top: 0.75rem;">
-                    <label>Payment Status</label>
-                    <select id="filter-payment" onchange="applyFilters()">
-                        <option value="">All</option>
-                        <option value="paid">Paid</option>
-                        <option value="unpaid">Unpaid</option>
-                    </select>
-                </div>
-                <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="clearFilters()">Clear Filters</button>
-            </div>
-
-            <div class="sidebar-section">
-                <h3>⚡ Quick Actions</h3>
-                <button class="btn btn-success" style="width: 100%; margin-bottom: 0.5rem;" onclick="markSelectedPaid()">✓ Mark Selected Paid</button>
-                <button class="btn btn-danger" style="width: 100%;" onclick="deleteSelected()">🗑 Delete Selected</button>
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem; color: var(--text-primary); border-color: var(--border);" onclick="clearFilters()">Reset Filters</button>
             </div>
         </aside>
 
         <main class="content">
             <div class="tabs">
-                <button class="tab active" onclick="switchTab('all', this)">All Transactions</button>
+                <button class="tab active" onclick="switchTab('all', this)">All</button>
                 <button class="tab" onclick="switchTab('pending', this)">Pending</button>
                 <button class="tab" onclick="switchTab('completed', this)">Completed</button>
-                <button class="tab" onclick="switchTab('paid', this)">Paid</button>
             </div>
 
             <div class="table-container">
                 <div class="table-toolbar">
                     <div class="search-box">
-                        🔍
-                        <input type="text" id="search-input" placeholder="Search transactions, suppliers..." onkeyup="handleSearch()">
+                        🔍 <input type="text" id="search-input" placeholder="Search suppliers or details..." onkeyup="updateTable()">
                     </div>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button class="btn btn-sm btn-secondary" onclick="selectAll()">Select All</button>
-                        <button class="btn btn-sm btn-secondary" onclick="deselectAll()">Deselect All</button>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">
+                        Showing <span id="record-count">0</span> records
                     </div>
                 </div>
 
@@ -550,19 +253,14 @@
                     <table id="procurement-table">
                         <thead>
                             <tr>
-                                <th style="width: 40px;"><input type="checkbox" id="select-all-checkbox" onchange="toggleSelectAll()"></th>
-                                <th>Details</th>
-                                <th>Supplier</th>
-                                <th>Amount (GYD)</th>
-                                <th>RFQ Date</th>
-                                <th>Close Date</th>
-                                <th>RFQ</th>
-                                <th>Quotes</th>
-                                <th>Bid Eval</th>
+                                <th onclick="handleSort('details')">Details <span class="sort-icon">↕</span></th>
+                                <th onclick="handleSort('supplier')">Supplier <span class="sort-icon">↕</span></th>
+                                <th onclick="handleSort('amount')">Amount <span class="sort-icon">↕</span></th>
+                                <th onclick="handleSort('rfqDate')">RFQ Date <span class="sort-icon">↕</span></th>
+                                <th onclick="handleSort('closeDate')">Close Date <span class="sort-icon">↕</span></th>
                                 <th>Approval</th>
-                                <th>PO Sent</th>
                                 <th>Paid</th>
-                                <th>Actions</th>
+                                <th style="cursor: default">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="table-body"></tbody>
@@ -572,585 +270,295 @@
         </main>
     </div>
 
-    <!-- Add/Edit Modal -->
     <div class="modal-overlay" id="transaction-modal">
         <div class="modal">
             <div class="modal-header">
-                <h2 id="modal-title">Add New Transaction</h2>
-                <button class="modal-close" onclick="closeModal('transaction-modal')">&times;</button>
+                <h2 id="modal-title" style="font-size: 1.1rem;">Add Transaction</h2>
+                <button onclick="closeModal('transaction-modal')" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="transaction-form" class="form-grid">
                     <input type="hidden" id="edit-id">
                     <div class="form-group full-width">
-                        <label for="details">Transaction Details *</label>
-                        <input type="text" id="details" required placeholder="e.g., Toners for Stock Room (HP)">
+                        <label>Details</label>
+                        <input type="text" id="details" required>
                     </div>
                     <div class="form-group">
-                        <label for="supplier">Supplier *</label>
-                        <input type="text" id="supplier" required placeholder="e.g., PBS Technologies Inc.">
+                        <label>Supplier</label>
+                        <input type="text" id="supplier" required>
                     </div>
                     <div class="form-group">
-                        <label for="amount">Amount (GYD) *</label>
-                        <input type="number" id="amount" required step="0.01" placeholder="0.00">
+                        <label>Amount (GYD)</label>
+                        <input type="number" id="amount" required>
                     </div>
                     <div class="form-group">
-                        <label for="rfq-date">RFQ Date *</label>
-                        <input type="date" id="rfq-date" required>
+                        <label>RFQ Date</label>
+                        <input type="date" id="rfq-date">
                     </div>
                     <div class="form-group">
-                        <label for="close-date">Close Date *</label>
-                        <input type="date" id="close-date" required>
+                        <label>Close Date</label>
+                        <input type="date" id="close-date">
                     </div>
                     <div class="form-group">
-                        <label for="rfq-status">RFQ Status</label>
-                        <select id="rfq-status">
-                            <option value="Not Started">Not Started</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="quotes-status">Quotations Status</label>
-                        <select id="quotes-status">
-                            <option value="Not Started">Not Started</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="bid-eval-status">Bid Evaluation Status</label>
-                        <select id="bid-eval-status">
-                            <option value="Not Started">Not Started</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Not Required">Not Required</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="approval-status">Approval Status</label>
+                        <label>Approval Status</label>
                         <select id="approval-status">
                             <option value="Pending">Pending</option>
                             <option value="Approved by CS">Approved by CS</option>
                             <option value="Approved by Tender Board">Approved by Tender Board</option>
-                            <option value="For Tender Board Approval">For Tender Board Approval</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="approval-date">Approval Date</label>
-                        <input type="date" id="approval-date">
+                        <label>Approval #</label> <input type="text" id="mtb-number">
                     </div>
                     <div class="form-group">
-                        <label for="mtb-number">MTB Approval #</label>
-                        <input type="text" id="mtb-number" placeholder="e.g., 05/2025/03">
-                    </div>
-                    <div class="form-group">
-                        <label for="po-number">Purchase Order #</label>
-                        <input type="text" id="po-number" placeholder="e.g., 01/2025">
-                    </div>
-                    <div class="form-group">
-                        <label for="po-sent">PO Sent to Supplier</label>
-                        <select id="po-sent">
-                            <option value="false">No</option>
-                            <option value="true">Yes</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="payment-made">Payment Made</label>
+                        <label>Payment Made</label>
                         <select id="payment-made">
                             <option value="false">No</option>
                             <option value="true">Yes</option>
                         </select>
                     </div>
                     <div class="form-group full-width">
-                        <label for="remarks">Remarks</label>
-                        <textarea id="remarks" placeholder="Additional notes or comments..."></textarea>
+                        <label>Remarks</label>
+                        <textarea id="remarks"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('transaction-modal')">Cancel</button>
-                <button class="btn btn-primary" id="save-btn" onclick="saveTransaction()">Save Transaction</button>
+                <button class="btn" style="background:#e2e8f0; color:#475569" onclick="closeModal('transaction-modal')">Cancel</button>
+                <button class="btn btn-primary" style="background:var(--primary); color:white" onclick="saveTransaction()">Save Record</button>
             </div>
         </div>
     </div>
 
-    <!-- Import Modal -->
     <div class="modal-overlay" id="import-modal">
-        <div class="modal" style="max-width: 500px;">
-            <div class="modal-header">
-                <h2>Import Excel Data</h2>
-                <button class="modal-close" onclick="closeModal('import-modal')">&times;</button>
-            </div>
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-header"><h2>Import Excel</h2></div>
             <div class="modal-body">
-                <div class="import-zone" id="drop-zone">
-                    <input type="file" id="excel-input" accept=".xlsx,.xls" onchange="handleFileSelect(event)">
-                    <label for="excel-input">
-                        <span class="import-icon">📁</span>
-                        <strong>Click to select or drag & drop</strong>
-                        <span style="color: var(--text-muted); font-size: 0.875rem;">Supports .xlsx and .xls files</span>
-                    </label>
-                </div>
-                <div style="background: var(--bg-dark); padding: 1rem; border-radius: 8px;">
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Expected Columns:</strong></p>
-                    <ul style="font-size: 0.8125rem; color: var(--text-muted); padding-left: 1.5rem;">
-                        <li>Details, Date of RFQ, Close of RFQ, Supplier, Amount</li>
-                        <li>Request for Quotation, Quotations Collected, Bid Evaluation</li>
-                        <li>Approved, Date of Approval, MTB Approval #</li>
-                        <li>Purchase Order No., PO Sent to Supplier, Payment Made, Remarks</li>
-                    </ul>
-                </div>
+                <input type="file" id="excel-input" accept=".xlsx,.xls" onchange="handleFileSelect(event)">
+                <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 1rem;">Maps columns from 2023/2025 Spreadsheet Templates.</p>
             </div>
         </div>
     </div>
 
-    <div class="toast-container" id="toast-container"></div>
+    <div id="toast-container" class="toast-container"></div>
 
     <script>
         let transactions = [];
-        let filteredTransactions = [];
         let currentTab = 'all';
-        let selectedIds = new Set();
+        let sortColumn = 'rfqDate';
+        let sortDirection = -1; // Default descending (newest first)
 
-        // Load immediately when page loads
+        // Initial Load
         loadFromLocalStorage();
-        updateTable();
-        updateStats();
-        setupDragAndDrop();
 
-        function saveToLocalStorage() {
-            localStorage.setItem('bos_procurement_data', JSON.stringify(transactions));
-        }
-
+        function saveToLocalStorage() { localStorage.setItem('bos_procurement_data', JSON.stringify(transactions)); }
         function loadFromLocalStorage() {
-            try {
-                const saved = localStorage.getItem('bos_procurement_data');
-                if (saved) {
-                    transactions = JSON.parse(saved);
-                    filteredTransactions = [...transactions];
-                }
-            } catch (e) {
-                console.error('Error loading data:', e);
-                transactions = [];
-                filteredTransactions = [];
+            const saved = localStorage.getItem('bos_procurement_data');
+            if (saved) { transactions = JSON.parse(saved); }
+            updateTable();
+            updateStats();
+        }
+
+        function handleSort(column) {
+            if (sortColumn === column) {
+                sortDirection *= -1;
+            } else {
+                sortColumn = column;
+                sortDirection = 1;
             }
-        }
-
-        function generateId() {
-            return 'TXN-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
-        }
-
-        function formatCurrency(amount) {
-            if (!amount || isNaN(amount)) return '-';
-            return new Intl.NumberFormat('en-GY', { style: 'currency', currency: 'GYD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount);
-        }
-
-        function formatDate(dateStr) {
-            if (!dateStr) return '-';
-            const date = new Date(dateStr);
-            if (isNaN(date.getTime())) return '-';
-            return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-        }
-
-        function getStatusBadge(status) {
-            if (!status || status === '-') return '<span class="status-badge status-not-started">-</span>';
-            const statusLower = status.toLowerCase();
-            let className = 'status-not-started';
-            if (statusLower.includes('completed')) className = 'status-completed';
-            else if (statusLower.includes('in progress')) className = 'status-in-progress';
-            else if (statusLower.includes('pending')) className = 'status-pending';
-            else if (statusLower.includes('approved by cs')) className = 'status-approved-cs';
-            else if (statusLower.includes('approved by tender')) className = 'status-approved-tb';
-            else if (statusLower.includes('for tender')) className = 'status-for-approval';
-            return `<span class="status-badge ${className}">${status}</span>`;
+            updateTable();
         }
 
         function updateTable() {
             const tbody = document.getElementById('table-body');
-            applyFilters();
-            
-            if (filteredTransactions.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="13"><div class="empty-state"><div class="empty-state-icon">📋</div><h3>No Transactions Found</h3><p>Import your Excel data or add a new transaction to get started.</p></div></td></tr>`;
-                return;
-            }
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const statusFilter = document.getElementById('filter-status').value;
+            const dateFrom = document.getElementById('filter-date-from').value;
+            const dateTo = document.getElementById('filter-date-to').value;
 
-            tbody.innerHTML = filteredTransactions.map(txn => `
-                <tr data-id="${txn.id}">
-                    <td class="checkbox-cell"><input type="checkbox" class="row-checkbox" ${selectedIds.has(txn.id) ? 'checked' : ''} onchange="toggleRowSelect('${txn.id}')"></td>
-                    <td><div style="max-width: 250px;"><div style="font-weight: 500;">${txn.details || '-'}</div><div class="procurement-id">${txn.id}</div></div></td>
-                    <td><span class="supplier-name">${txn.supplier || '-'}</span></td>
-                    <td class="amount-cell">${formatCurrency(txn.amount)}</td>
-                    <td>${formatDate(txn.rfqDate)}</td>
-                    <td>${formatDate(txn.closeDate)}</td>
-                    <td>${getStatusBadge(txn.rfqStatus)}</td>
-                    <td>${getStatusBadge(txn.quotesStatus)}</td>
-                    <td>${getStatusBadge(txn.bidEvalStatus)}</td>
-                    <td>${getStatusBadge(txn.approvalStatus)}</td>
-                    <td><span class="status-badge ${txn.poSent ? 'status-completed' : 'status-not-started'}">${txn.poSent ? 'Yes' : 'No'}</span></td>
-                    <td><span class="status-badge ${txn.paymentMade ? 'status-completed' : 'status-pending'}">${txn.paymentMade ? 'Paid' : 'Unpaid'}</span></td>
-                    <td><div class="action-btns"><button class="action-btn" onclick="editTransaction('${txn.id}')" title="Edit">✏️</button><button class="action-btn delete" onclick="deleteTransaction('${txn.id}')" title="Delete">🗑️</button></div></td>
+            // Filter
+            let displayData = transactions.filter(txn => {
+                const matchesSearch = (txn.details + txn.supplier).toLowerCase().includes(searchTerm);
+                const matchesStatus = !statusFilter || txn.approvalStatus === statusFilter;
+                const matchesTab = currentTab === 'all' || 
+                                  (currentTab === 'pending' && !txn.approvalStatus.includes('Approved')) ||
+                                  (currentTab === 'completed' && txn.approvalStatus.includes('Approved'));
+                
+                const matchesDate = (!dateFrom || txn.rfqDate >= dateFrom) && 
+                                   (!dateTo || txn.rfqDate <= dateTo);
+
+                return matchesSearch && matchesStatus && matchesTab && matchesDate;
+            });
+
+            // Sort
+            displayData.sort((a, b) => {
+                let valA = a[sortColumn] || '';
+                let valB = b[sortColumn] || '';
+                
+                if (sortColumn === 'amount') {
+                    valA = parseFloat(valA);
+                    valB = parseFloat(valB);
+                }
+
+                if (valA < valB) return -1 * sortDirection;
+                if (valA > valB) return 1 * sortDirection;
+                return 0;
+            });
+
+            document.getElementById('record-count').textContent = displayData.length;
+
+            tbody.innerHTML = displayData.map(txn => `
+                <tr>
+                    <td><div style="font-weight:600">${txn.details || '-'}</div><div style="font-size:0.65rem; color:var(--text-muted)">${txn.id}</div></td>
+                    <td><span style="color:var(--primary); font-weight:500">${txn.supplier || '-'}</span></td>
+                    <td style="font-family: 'JetBrains Mono'; font-weight:700">$${(txn.amount || 0).toLocaleString()}</td>
+                    <td>${txn.rfqDate || '-'}</td>
+                    <td>${txn.closeDate || '-'}</td>
+                    <td><span class="status-badge ${txn.approvalStatus.includes('Approved') ? 'status-completed' : 'status-pending'}">${txn.approvalStatus}</span></td>
+                    <td>${txn.paymentMade ? '✅' : '❌'}</td>
+                    <td>
+                        <button onclick="editTransaction('${txn.id}')" style="background:none; border:none; cursor:pointer;">✏️</button>
+                        <button onclick="deleteTransaction('${txn.id}')" style="background:none; border:none; cursor:pointer;">🗑️</button>
+                    </td>
                 </tr>
             `).join('');
+            updateStats();
         }
 
         function updateStats() {
             const total = transactions.length;
-            const completed = transactions.filter(t => t.approvalStatus && t.approvalStatus.toLowerCase().includes('approved')).length;
-            const pending = transactions.filter(t => !t.approvalStatus || t.approvalStatus.toLowerCase().includes('pending') || t.approvalStatus.toLowerCase().includes('for tender')).length;
+            const pending = transactions.filter(t => t.approvalStatus === 'Pending').length;
             const paid = transactions.filter(t => t.paymentMade).length;
-            const totalAmount = transactions.reduce((sum, t) => sum + (parseFloat(t.amount) || 0), 0);
+            const totalSpend = transactions.reduce((sum, t) => sum + (parseFloat(t.amount) || 0), 0);
 
             document.getElementById('stat-total').textContent = total;
-            document.getElementById('stat-completed').textContent = completed;
             document.getElementById('stat-pending').textContent = pending;
             document.getElementById('stat-paid').textContent = paid;
-            document.getElementById('stat-amount').textContent = formatCurrency(totalAmount);
+            document.getElementById('stat-amount').textContent = '$' + totalSpend.toLocaleString();
         }
 
-        function applyFilters() {
-            const yearFilter = document.getElementById('filter-year').value;
-            const statusFilter = document.getElementById('filter-status').value;
-            const paymentFilter = document.getElementById('filter-payment').value;
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
-
-            filteredTransactions = transactions.filter(txn => {
-                if (yearFilter) {
-                    const year = txn.rfqDate ? new Date(txn.rfqDate).getFullYear().toString() : '';
-                    if (year !== yearFilter) return false;
-                }
-                if (statusFilter && txn.approvalStatus !== statusFilter) return false;
-                if (paymentFilter === 'paid' && !txn.paymentMade) return false;
-                if (paymentFilter === 'unpaid' && txn.paymentMade) return false;
-                if (currentTab === 'pending' && txn.approvalStatus && txn.approvalStatus.toLowerCase().includes('approved by')) return false;
-                if (currentTab === 'completed' && (!txn.approvalStatus || !txn.approvalStatus.toLowerCase().includes('approved by'))) return false;
-                if (currentTab === 'paid' && !txn.paymentMade) return false;
-                if (searchTerm) {
-                    const searchFields = [txn.details, txn.supplier, txn.id, txn.remarks].filter(Boolean).map(f => f.toLowerCase());
-                    if (!searchFields.some(f => f.includes(searchTerm))) return false;
-                }
-                return true;
-            });
-        }
-
-        function clearFilters() {
-            document.getElementById('filter-year').value = '';
-            document.getElementById('filter-status').value = '';
-            document.getElementById('filter-payment').value = '';
-            document.getElementById('search-input').value = '';
-            updateTable();
-        }
-
-        function handleSearch() { updateTable(); }
-
-        function switchTab(tab, element) {
-            currentTab = tab;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            element.classList.add('active');
-            updateTable();
-        }
-
-        function toggleRowSelect(id) {
-            if (selectedIds.has(id)) selectedIds.delete(id);
-            else selectedIds.add(id);
-        }
-
-        function toggleSelectAll() {
-            const checkbox = document.getElementById('select-all-checkbox');
-            if (checkbox.checked) filteredTransactions.forEach(t => selectedIds.add(t.id));
-            else selectedIds.clear();
-            updateTable();
-        }
-
-        function selectAll() {
-            filteredTransactions.forEach(t => selectedIds.add(t.id));
-            document.getElementById('select-all-checkbox').checked = true;
-            updateTable();
-        }
-
-        function deselectAll() {
-            selectedIds.clear();
-            document.getElementById('select-all-checkbox').checked = false;
-            updateTable();
-        }
-
-        function showModal(modalId) { document.getElementById(modalId).classList.add('active'); }
-        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        // Modal Logic
+        function showModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
         function showAddModal() {
-            document.getElementById('modal-title').textContent = 'Add New Transaction';
             document.getElementById('transaction-form').reset();
             document.getElementById('edit-id').value = '';
-            document.getElementById('rfq-date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('modal-title').textContent = 'Add New Transaction';
+            showModal('transaction-modal');
+        }
+
+        function saveTransaction() {
+            const id = document.getElementById('edit-id').value || 'TXN-' + Date.now();
+            const data = {
+                id: id,
+                details: document.getElementById('details').value,
+                supplier: document.getElementById('supplier').value,
+                amount: document.getElementById('amount').value,
+                rfqDate: document.getElementById('rfq-date').value,
+                closeDate: document.getElementById('close-date').value,
+                approvalStatus: document.getElementById('approval-status').value,
+                mtbNumber: document.getElementById('mtb-number').value,
+                paymentMade: document.getElementById('payment-made').value === 'true',
+                remarks: document.getElementById('remarks').value
+            };
+
+            const idx = transactions.findIndex(t => t.id === id);
+            if (idx > -1) transactions[idx] = data;
+            else transactions.unshift(data);
+
+            saveToLocalStorage();
+            updateTable();
+            closeModal('transaction-modal');
+            showToast('Record Saved Successfully');
+        }
+
+        function deleteTransaction(id) {
+            if (confirm('Delete this record?')) {
+                transactions = transactions.filter(t => t.id !== id);
+                saveToLocalStorage();
+                updateTable();
+                showToast('Record Deleted', 'danger');
+            }
+        }
+
+        function editTransaction(id) {
+            const txn = transactions.find(t => t.id === id);
+            document.getElementById('edit-id').value = txn.id;
+            document.getElementById('details').value = txn.details;
+            document.getElementById('supplier').value = txn.supplier;
+            document.getElementById('amount').value = txn.amount;
+            document.getElementById('rfq-date').value = txn.rfqDate;
+            document.getElementById('close-date').value = txn.closeDate;
+            document.getElementById('approval-status').value = txn.approvalStatus;
+            document.getElementById('mtb-number').value = txn.mtbNumber;
+            document.getElementById('payment-made').value = txn.paymentMade.toString();
+            document.getElementById('remarks').value = txn.remarks;
+            document.getElementById('modal-title').textContent = 'Edit Transaction';
             showModal('transaction-modal');
         }
 
         function showImportModal() { showModal('import-modal'); }
 
-        function saveTransaction() {
-            const editId = document.getElementById('edit-id').value;
-            const txn = {
-                id: editId || generateId(),
-                details: document.getElementById('details').value,
-                supplier: document.getElementById('supplier').value,
-                amount: parseFloat(document.getElementById('amount').value) || 0,
-                rfqDate: document.getElementById('rfq-date').value,
-                closeDate: document.getElementById('close-date').value,
-                rfqStatus: document.getElementById('rfq-status').value,
-                quotesStatus: document.getElementById('quotes-status').value,
-                bidEvalStatus: document.getElementById('bid-eval-status').value,
-                approvalStatus: document.getElementById('approval-status').value,
-                approvalDate: document.getElementById('approval-date').value,
-                mtbNumber: document.getElementById('mtb-number').value,
-                poNumber: document.getElementById('po-number').value,
-                poSent: document.getElementById('po-sent').value === 'true',
-                paymentMade: document.getElementById('payment-made').value === 'true',
-                remarks: document.getElementById('remarks').value,
-                updatedAt: new Date().toISOString()
-            };
-
-            if (editId) {
-                const index = transactions.findIndex(t => t.id === editId);
-                if (index !== -1) transactions[index] = { ...transactions[index], ...txn };
-                showToast('Transaction updated successfully', 'success');
-            } else {
-                txn.createdAt = new Date().toISOString();
-                transactions.unshift(txn);
-                showToast('Transaction added successfully', 'success');
-            }
-
-            saveToLocalStorage();
-            updateTable();
-            updateStats();
-            closeModal('transaction-modal');
-        }
-
-        function editTransaction(id) {
-            const txn = transactions.find(t => t.id === id);
-            if (!txn) return;
-            document.getElementById('modal-title').textContent = 'Edit Transaction';
-            document.getElementById('edit-id').value = txn.id;
-            document.getElementById('details').value = txn.details || '';
-            document.getElementById('supplier').value = txn.supplier || '';
-            document.getElementById('amount').value = txn.amount || '';
-            document.getElementById('rfq-date').value = txn.rfqDate || '';
-            document.getElementById('close-date').value = txn.closeDate || '';
-            document.getElementById('rfq-status').value = txn.rfqStatus || 'Not Started';
-            document.getElementById('quotes-status').value = txn.quotesStatus || 'Not Started';
-            document.getElementById('bid-eval-status').value = txn.bidEvalStatus || 'Not Started';
-            document.getElementById('approval-status').value = txn.approvalStatus || 'Pending';
-            document.getElementById('approval-date').value = txn.approvalDate || '';
-            document.getElementById('mtb-number').value = txn.mtbNumber || '';
-            document.getElementById('po-number').value = txn.poNumber || '';
-            document.getElementById('po-sent').value = txn.poSent ? 'true' : 'false';
-            document.getElementById('payment-made').value = txn.paymentMade ? 'true' : 'false';
-            document.getElementById('remarks').value = txn.remarks || '';
-            showModal('transaction-modal');
-        }
-
-        function deleteTransaction(id) {
-            if (!confirm('Are you sure you want to delete this transaction?')) return;
-            transactions = transactions.filter(t => t.id !== id);
-            selectedIds.delete(id);
-            saveToLocalStorage();
-            updateTable();
-            updateStats();
-            showToast('Transaction deleted', 'warning');
-        }
-
-        function deleteSelected() {
-            if (selectedIds.size === 0) { showToast('No transactions selected', 'warning'); return; }
-            if (!confirm(`Delete ${selectedIds.size} selected transaction(s)?`)) return;
-            transactions = transactions.filter(t => !selectedIds.has(t.id));
-            selectedIds.clear();
-            saveToLocalStorage();
-            updateTable();
-            updateStats();
-            showToast('Selected transactions deleted', 'warning');
-        }
-
-        function markSelectedPaid() {
-            if (selectedIds.size === 0) { showToast('No transactions selected', 'warning'); return; }
-            transactions.forEach(t => { if (selectedIds.has(t.id)) { t.paymentMade = true; t.updatedAt = new Date().toISOString(); } });
-            selectedIds.clear();
-            saveToLocalStorage();
-            updateTable();
-            updateStats();
-            showToast('Marked as paid', 'success');
-        }
-
-        function setupDragAndDrop() {
-            const dropZone = document.getElementById('drop-zone');
-            if (!dropZone) return;
-            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-            dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
-            dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files.length > 0) processExcelFile(e.dataTransfer.files[0]); });
-        }
-
-        function handleFileSelect(event) {
-            if (event.target.files[0]) processExcelFile(event.target.files[0]);
-        }
-
-        function processExcelFile(file) {
+        function handleFileSelect(e) {
             const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    let imported = 0;
+            reader.onload = function(event) {
+                const data = new Uint8Array(event.target.result);
+                const wb = XLSX.read(data, {type: 'array'});
+                const sheet = wb.Sheets[wb.SheetNames[0]];
+                const json = XLSX.utils.sheet_to_json(sheet);
+                
+                // Simple mapping for demonstration
+                const imported = json.map(row => ({
+                    id: 'TXN-' + Math.random().toString(36).substr(2, 5).toUpperCase(),
+                    details: row['Details'] || row['details'] || '',
+                    supplier: row['Supplier'] || row['supplier'] || '',
+                    amount: row['Amount'] || 0,
+                    rfqDate: row['Date of RFQ'] || '',
+                    closeDate: row['Close of RFQ'] || '',
+                    approvalStatus: row['Approved'] || 'Pending',
+                    paymentMade: row['Paid'] === 'True' || row['Paid'] === 'paid' || false,
+                    remarks: row['Remarks'] || ''
+                }));
 
-                    workbook.SheetNames.forEach(sheetName => {
-                        const sheet = workbook.Sheets[sheetName];
-                        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-                        if (jsonData.length < 3) return;
-
-                        let headerRow = -1;
-                        for (let i = 0; i < Math.min(5, jsonData.length); i++) {
-                            const row = jsonData[i];
-                            if (row && row.some(cell => cell && (cell.toString().toLowerCase().includes('details') || cell.toString().toLowerCase().includes('date of rfq') || cell.toString().toLowerCase().includes('supplier')))) {
-                                headerRow = i;
-                                break;
-                            }
-                        }
-                        if (headerRow === -1) return;
-
-                        const headers = jsonData[headerRow].map(h => h ? h.toString().toLowerCase().trim() : '');
-                        const colMap = {
-                            details: headers.findIndex(h => h.includes('detail')),
-                            rfqDate: headers.findIndex(h => h.includes('date of rfq')),
-                            closeDate: headers.findIndex(h => h.includes('close')),
-                            supplier: headers.findIndex(h => h.includes('supplier')),
-                            amount: headers.findIndex(h => h.includes('amount')),
-                            rfqStatus: headers.findIndex(h => h.includes('request for quotation')),
-                            quotesStatus: headers.findIndex(h => h.includes('quotation') && h.includes('collect')),
-                            bidEvalStatus: headers.findIndex(h => h.includes('bid') || h.includes('evaluation')),
-                            approvalStatus: headers.findIndex(h => h === 'approved' || h.includes('approval')),
-                            approvalDate: headers.findIndex(h => h.includes('date of approval')),
-                            mtbNumber: headers.findIndex(h => h.includes('mtb')),
-                            poNumber: headers.findIndex(h => h.includes('purchase order no')),
-                            poSent: headers.findIndex(h => h.includes('po sent') || h.includes('sent to supplier')),
-                            paymentMade: headers.findIndex(h => h.includes('payment') || h.includes('paid')),
-                            remarks: headers.findIndex(h => h.includes('remark'))
-                        };
-
-                        const parseDate = (val) => {
-                            if (!val) return '';
-                            if (typeof val === 'number') return new Date((val - 25569) * 86400 * 1000).toISOString().split('T')[0];
-                            try { const d = new Date(val); if (!isNaN(d.getTime())) return d.toISOString().split('T')[0]; } catch (e) {}
-                            return '';
-                        };
-                        const parseAmount = (val) => { if (!val) return 0; if (typeof val === 'number') return val; const n = parseFloat(val.toString().replace(/[^0-9.-]/g, '')); return isNaN(n) ? 0 : n; };
-                        const parseBool = (val) => { if (!val) return false; if (typeof val === 'boolean') return val; const s = val.toString().toLowerCase(); return s === 'true' || s === 'yes' || s === '1' || s === 'paid'; };
-
-                        for (let i = headerRow + 1; i < jsonData.length; i++) {
-                            const row = jsonData[i];
-                            if (!row || row.length === 0) continue;
-                            const details = colMap.details >= 0 ? row[colMap.details] : null;
-                            const supplier = colMap.supplier >= 0 ? row[colMap.supplier] : null;
-                            if (!details && !supplier) continue;
-                            if (details && details.toString().toLowerCase() === 'example') continue;
-
-                            const txn = {
-                                id: generateId(),
-                                details: details ? details.toString() : '',
-                                supplier: supplier ? supplier.toString() : '',
-                                amount: parseAmount(colMap.amount >= 0 ? row[colMap.amount] : 0),
-                                rfqDate: parseDate(colMap.rfqDate >= 0 ? row[colMap.rfqDate] : null),
-                                closeDate: parseDate(colMap.closeDate >= 0 ? row[colMap.closeDate] : null),
-                                rfqStatus: colMap.rfqStatus >= 0 && row[colMap.rfqStatus] ? row[colMap.rfqStatus].toString() : 'Not Started',
-                                quotesStatus: colMap.quotesStatus >= 0 && row[colMap.quotesStatus] ? row[colMap.quotesStatus].toString() : 'Not Started',
-                                bidEvalStatus: colMap.bidEvalStatus >= 0 && row[colMap.bidEvalStatus] ? row[colMap.bidEvalStatus].toString() : 'Not Started',
-                                approvalStatus: colMap.approvalStatus >= 0 && row[colMap.approvalStatus] ? row[colMap.approvalStatus].toString() : 'Pending',
-                                approvalDate: parseDate(colMap.approvalDate >= 0 ? row[colMap.approvalDate] : null),
-                                mtbNumber: colMap.mtbNumber >= 0 && row[colMap.mtbNumber] ? row[colMap.mtbNumber].toString() : '',
-                                poNumber: colMap.poNumber >= 0 && row[colMap.poNumber] ? row[colMap.poNumber].toString() : '',
-                                poSent: parseBool(colMap.poSent >= 0 ? row[colMap.poSent] : false),
-                                paymentMade: parseBool(colMap.paymentMade >= 0 ? row[colMap.paymentMade] : false),
-                                remarks: colMap.remarks >= 0 && row[colMap.remarks] ? row[colMap.remarks].toString() : '',
-                                importedFrom: sheetName,
-                                createdAt: new Date().toISOString(),
-                                updatedAt: new Date().toISOString()
-                            };
-                            if (txn.details || txn.supplier || txn.amount > 0) { transactions.push(txn); imported++; }
-                        }
-                    });
-
-                    if (imported > 0) {
-                        saveToLocalStorage();
-                        updateTable();
-                        updateStats();
-                        showToast(`Imported ${imported} transactions!`, 'success');
-                        closeModal('import-modal');
-                    } else {
-                        showToast('No valid data found', 'warning');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    showToast('Error processing file', 'error');
-                }
+                transactions = [...imported, ...transactions];
+                saveToLocalStorage();
+                updateTable();
+                closeModal('import-modal');
+                showToast(`Imported ${imported.length} rows`);
             };
-            reader.readAsArrayBuffer(file);
+            reader.readAsArrayBuffer(e.target.files[0]);
+        }
+
+        function switchTab(tab, el) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            updateTable();
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-date-from').value = '';
+            document.getElementById('filter-date-to').value = '';
+            document.getElementById('filter-status').value = '';
+            document.getElementById('search-input').value = '';
+            updateTable();
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
         }
 
         function exportToExcel() {
-            if (transactions.length === 0) { showToast('No data to export', 'warning'); return; }
-            const exportData = filteredTransactions.map(txn => ({
-                'Transaction ID': txn.id, 'Details': txn.details, 'Supplier': txn.supplier, 'Amount (GYD)': txn.amount,
-                'RFQ Date': txn.rfqDate, 'Close Date': txn.closeDate, 'RFQ Status': txn.rfqStatus,
-                'Quotations Status': txn.quotesStatus, 'Bid Evaluation': txn.bidEvalStatus, 'Approval Status': txn.approvalStatus,
-                'Approval Date': txn.approvalDate, 'MTB Approval #': txn.mtbNumber, 'Purchase Order #': txn.poNumber,
-                'PO Sent': txn.poSent ? 'Yes' : 'No', 'Payment Made': txn.paymentMade ? 'Yes' : 'No', 'Remarks': txn.remarks
-            }));
-            const ws = XLSX.utils.json_to_sheet(exportData);
+            const ws = XLSX.utils.json_to_sheet(transactions);
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Procurement Data');
-            XLSX.writeFile(wb, `BOS_Procurement_${new Date().toISOString().split('T')[0]}.xlsx`);
-            showToast('Excel exported!', 'success');
-        }
-
-        function exportToPDF() {
-            if (transactions.length === 0) { showToast('No data to export', 'warning'); return; }
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('landscape', 'mm', 'a4');
-            doc.setFontSize(16);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Bureau of Statistics - Procurement Tracking Report', 14, 15);
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-            doc.text(`Generated: ${new Date().toLocaleDateString('en-GB')}`, 14, 22);
-            doc.text(`Total Transactions: ${filteredTransactions.length}`, 14, 28);
-            const totalAmount = filteredTransactions.reduce((sum, t) => sum + (parseFloat(t.amount) || 0), 0);
-            doc.text(`Total Value: ${formatCurrency(totalAmount)}`, 14, 34);
-
-            const tableData = filteredTransactions.map(txn => [
-                txn.details ? txn.details.substring(0, 30) : '-',
-                txn.supplier ? txn.supplier.substring(0, 20) : '-',
-                formatCurrency(txn.amount),
-                formatDate(txn.rfqDate),
-                txn.approvalStatus || '-',
-                txn.paymentMade ? 'Paid' : 'Unpaid'
-            ]);
-
-            doc.autoTable({
-                startY: 40,
-                head: [['Details', 'Supplier', 'Amount', 'RFQ Date', 'Approval', 'Payment']],
-                body: tableData,
-                theme: 'striped',
-                headStyles: { fillColor: [26, 95, 74], textColor: 255, fontStyle: 'bold' },
-                styles: { fontSize: 8, cellPadding: 3 }
-            });
-
-            doc.save(`BOS_Procurement_Report_${new Date().toISOString().split('T')[0]}.pdf`);
-            showToast('PDF exported!', 'success');
-        }
-
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icons = { success: '✓', error: '✕', warning: '⚠' };
-            toast.innerHTML = `<span style="font-size: 1.25rem;">${icons[type] || '•'}</span><span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => { toast.style.animation = 'slideIn 0.3s ease reverse'; setTimeout(() => toast.remove(), 300); }, 3000);
+            XLSX.utils.book_append_sheet(wb, ws, "Procurement");
+            XLSX.writeFile(wb, "BOS_Procurement_Export.xlsx");
         }
     </script>
 </body>

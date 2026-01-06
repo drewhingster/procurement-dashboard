@@ -1,7 +1,16 @@
 {
   "name": "procurement-dashboard",
   "compatibility_date": "2026-01-05",
+
   "assets": {
     "directory": "."
-  }
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "procurement-db",
+      "database_id": "68b8ec19-6f38-4afe-92f3-9b9f89509b85"
+    }
+  ]
 }
